@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Scholarship List</h1>
+
+    {% if scholarship_list %}
+    <ul>
+
+      {% for scholarship in scholarship_list %}
+      <li>
+        <a href="{{ scholarship.get_absolute_url }}">{{ scholarship.name }}</a> ({{scholarship.donor}})
+      </li>
+      {% endfor %}
+
+    </ul>
+
+    {% else %}
+      <p>There are no scholarships in the library.</p>
+    {% endif %}
+{% endblock %}

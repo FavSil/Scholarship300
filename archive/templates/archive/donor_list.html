@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Donor List</h1>
+
+{% if donor_list %}
+  <ul>
+
+  {% for donor in donor_list %}
+    <li>
+      <a href="{{ donor.get_absolute_url }}">
+      {{ donor }} ({{donor.date_of_birth}} - {% if donor.date_of_death %}{{donor.date_of_death}}{% endif %})
+      </a>
+    </li>
+  {% endfor %}
+
+ </ul>
+{% else %}
+  <p>There are no donors available.</p>
+{% endif %}
+
+
+
+{% endblock %}
