@@ -7,7 +7,7 @@
     <ul>
 
       {% for scholarshipinst in scholarshipinstance_list %}
-      <li class="{% if scholarshipinst.is_overdue %}text-danger{% endif %}">
+      <li class="{% if scholarshipinst.is_pastdeadline %}text-danger{% endif %}">
         <a href="{% url 'scholarship-detail' scholarshipinst.scholarship.pk %}">{{scholarshipinst.scholarship.name}}</a> ({{ scholarshipinst.due_back }})
       </li>
       {% endfor %}

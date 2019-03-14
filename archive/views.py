@@ -1,4 +1,4 @@
-from django.shortcuts import render
+Awardfrom django.shortcuts import render
 
 # Create your views here.
 
@@ -55,9 +55,9 @@ class DonorDetailView(generic.DetailView):
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-
-class LoanedScholarshipsByUserListView(LoginRequiredMixin, generic.ListView):
-    """Generic class-based view listing scholarships on loan to current user."""
+##in testing will not work propperly!!!
+class AwardedScholarshipsByUserListView(LoginRequiredMixin, generic.ListView):
+    """Generic class-based view listing scholarships on awared to current user."""
     model = ScholarshipInstance
     template_name = 'archive/scholarshipinstance_list_applied_user.html'
     paginate_by = 10
@@ -65,13 +65,11 @@ class LoanedScholarshipsByUserListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return ScholarshipInstance.objects.filter(applicant=self.request.user).filter(status__exact='o').order_by('deadline')
 
-
-# Added as part of challenge!
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
-class LoanedScholarshipsAllListView(PermissionRequiredMixin, generic.ListView):
-    """Generic class-based view listing all scholarships on loan. Only visible to users with can_mark_returned permission."""
+class AwardedScholarshipsAllListView(PermissionRequiredMixin, generic.ListView):
+    """Generic class-based view listing all scholarships awarded. Only visible to users with can_mark_returned permission."""
     model = ScholarshipInstance
     permission_required = 'archive.can_mark_returned'
     template_name = 'archive/scholarshipinstance_list_applied_all.html'
@@ -87,7 +85,7 @@ from django.urls import reverse
 import datetime
 from django.contrib.auth.decorators import permission_required
 
-# from .forms import RenewScholarshipForm
+# from .forms import ScholarshipForm
 from archive.forms import RenewScholarshipForm
 
 
@@ -148,7 +146,7 @@ class DonorDelete(PermissionRequiredMixin, DeleteView):
     permission_required = 'archive.can_mark_returned'
 
 
-# Classes created for the forms challenge
+# Classes created for the forms DOES NOT WORK
 class ScholarshipCreate(PermissionRequiredMixin, CreateView):
     model = Scholarship
     fields = '__all__'

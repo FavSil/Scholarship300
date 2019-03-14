@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Renew: {{scholarship_instance.scholarship.name}}</h1>
     <p>Applicant: {{scholarship_instance.applicant}}</p>
-    <p{% if scholarship_instance.is_overdue %} class="text-danger"{% endif %}>Due date: {{scholarship_instance.deadline}}</p>
+    <p{% if scholarship_instance.is_pastdeadline %} class="text-danger"{% endif %}>Due date: {{scholarship_instance.deadline}}</p>
 
     <form action="" method="post">
         {% csrf_token %}

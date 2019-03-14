@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 
-
+#index page url configurations
 urlpatterns = [
     path('', views.index, name='index'),
     path('scholarships/', views.ScholarshipListView.as_view(), name='scholarships'),
@@ -19,13 +19,13 @@ urlpatterns += [
 ]
 
 
-# Add URLConf for archival to renew a scholarship.
+#intesting
 urlpatterns += [
     path('scholarship/<uuid:pk>/renew/', views.renew_scholarship_archival, name='renew-scholarship-archival'),
 ]
 
 
-# Add URLConf to create, update, and delete donors
+# in testing
 urlpatterns += [
     path('donor/create/', views.DonorCreate.as_view(), name='donor_create'),
     path('donor/<int:pk>/update/', views.DonorUpdate.as_view(), name='donor_update'),

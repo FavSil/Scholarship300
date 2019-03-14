@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# MODELS USED IN DATABASE TODO create better models and foreing keys
 
 from django.urls import reverse  # To generate URLS by reversing URL patterns
 
@@ -18,9 +18,9 @@ class Type(models.Model):
 
 
 class GPA(models.Model):
-    """Model representing a Language (e.g. English, French, Japanese, etc.)"""
+    """Model representing a GPA TODO limit to positive integer"""
     grade = models.CharField(max_length=200,
-                            help_text="Enter the book's natural language (e.g. English, French, Japanese etc.)")
+                            help_text="Enter the min gpa required to apply ")
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
@@ -62,25 +62,25 @@ from django.contrib.auth.models import User  # Required to assign User as a appl
 
 
 class ScholarshipInstance(models.Model):
-    """Model representing a specific copy of a scholarship (i.e. that can be applied from the library)."""
+    """Model representing a specific copy of a scholarship (i.e. that can be applied from the Archive)."""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
-                          help_text="Unique ID for this particular scholarship across whole library")
+                          help_text="Unique ID for this particular scholarship across whole Archive")
     scholarship = models.ForeignKey('Scholarship', on_delete=models.SET_NULL, null=True)
     #    imprint = models.CharField(max_length=200)
     deadline = models.DateField(null=True, blank=True)
     applicant = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     @property
-    def is_overdue(self):
+    def is_pastdeadline(self):
         if self.deadline and date.today() > self.deadline:
             return True
         return False
 
     APPLICANT_STATUS = (
         ('d', 'Maintenance'),
-        ('o', 'On loan'),
+        ('o', 'Waitlist'),
         ('a', 'Available'),
-        ('r', 'Reserved'),
+        ('r', 'Rewarded'),
     )
 
     status = models.CharField(
@@ -92,7 +92,7 @@ class ScholarshipInstance(models.Model):
 
     class Meta:
         ordering = ['deadline']
-        permissions = (("can_mark_returned", "Set scholarship as returned"),)
+        permissions = (("can_mark_returned", "Set scholarship as applied"),)
 
     def __str__(self):
         """String for representing the Model object."""

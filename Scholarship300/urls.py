@@ -51,7 +51,8 @@ urlpatterns += [
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
 ]
-
+\
+#Admin site custom header.
 admin.site.site_header = 'Scholarship300 Admin'
 
 admin.site.site_title = 'Scholarship300 admin'
