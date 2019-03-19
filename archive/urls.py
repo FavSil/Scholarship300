@@ -14,8 +14,8 @@ urlpatterns = [
 
 
 urlpatterns += [
-    path('myscholarships/', views.LoanedScholarshipsByUserListView.as_view(), name='my-applied'),
-    path(r'applied/', views.LoanedScholarshipsAllListView.as_view(), name='all-applied'),  # Added for challenge
+    path('myscholarships/', views.AwardedScholarshipsByUserListView.as_view(), name='my-applied'),
+    path(r'applied/', views.AwardedScholarshipsAllListView.as_view(), name='all-applied'),  # Added for challenge
 ]
 
 
