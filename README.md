@@ -1,4 +1,7 @@
 # Scholarship300
+
+PREVIEW https://scholarship300.herokuapp.com/archive/
+
 favian silva
 with code adapted from https://developer.mozilla.org/en-US/docs/Learn/ and youtube django tutorials
 
