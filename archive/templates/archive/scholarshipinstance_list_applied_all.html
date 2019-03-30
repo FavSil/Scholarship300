@@ -8,7 +8,7 @@
 
       {% for scholarshipinst in scholarshipinstance_list %}
       <li class="{% if scholarshipinst.is_pastdeadline %}text-danger{% endif %}">
-        <a href="{% url 'scholarship-detail' scholarshipinst.scholarship.pk %}">{{scholarshipinst.scholarship.name}}</a> ({{ scholarshipinst.due_back }}) {% if user.is_staff %}- {{ scholarshipinst.applied }}{% endif %} {% if perms.archive.can_mark_returned %}- <a href="{% url 'renew-scholarship-archival' scholarshipinst.id %}">Renew</a>  {% endif %}
+        <a href="{% url 'scholarship-detail' scholarshipinst.scholarship.pk %}">{{scholarshipinst.scholarship.name}}</a> ({{ scholarshipinst.due_back }}) {% if user.is_staff %}- {{ scholarshipinst.applied }}{% endif %} {% if perms.archive.can_mark_applied %}- <a href="{% url 'apply-scholarship-archival' scholarshipinst.id %}">apply</a>  {% endif %}
       </li>
       {% endfor %}
     </ul>

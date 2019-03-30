@@ -66,7 +66,7 @@ class ScholarshipInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           help_text="Unique ID for this particular scholarship across whole Archive")
     scholarship = models.ForeignKey('Scholarship', on_delete=models.SET_NULL, null=True)
-    #    imprint = models.CharField(max_length=200)
+    imprint = models.CharField(max_length=200)
     deadline = models.DateField(null=True, blank=True)
     applicant = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -77,7 +77,7 @@ class ScholarshipInstance(models.Model):
         return False
 
     APPLICANT_STATUS = (
-        ('d', 'Maintenance'),
+        ('d', 'Applied'),
         ('o', 'Waitlist'),
         ('a', 'Available'),
         ('r', 'Rewarded'),

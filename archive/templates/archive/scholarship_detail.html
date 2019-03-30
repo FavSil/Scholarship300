@@ -11,15 +11,17 @@
 <p><strong>Type:</strong> {% for type in scholarship.type.all %}{{type}}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
 
 <div style="margin-left:20px;margin-top:20px">
-<h4>Copies</h4>
+<h4>Apply</h4>
 
-{% for copy in scholarship.scholarshipinstance_set.all %}
+{% for scholarship in scholarship.scholarshipinstance_set.all %}
 <hr>
-<p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'd' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</p>
-{% if copy.status != 'a' %}<p><strong>Due to be returned:</strong> {{copy.due_back}}</p>{% endif %}
+<p class="{% if scholarship.status == 'a' %}text-success{% elif copy.status == 'd' %}text-danger{% else %}text-warning{% endif %}">{{ scholarship.get_status_display }}</p>
+{% if scholarship.status != 'a' %}<p><strong>Not Available:</strong> {{scholarship.due_back}}</p>{% endif %}
 <p><strong>Imprint:</strong> {{copy.imprint}}</p>
 <p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
 
 {% endfor %}
 </div>
 {% endblock %}
+
+<!--{% if perms.archive.can_mark_applied %}- <a href="{% url 'apply-scholarship-archival' scholarshipinst.id %}">Renew</a>  {% endif %} -->

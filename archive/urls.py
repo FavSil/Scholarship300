@@ -21,7 +21,7 @@ urlpatterns += [
 
 #intesting
 urlpatterns += [
-    path('scholarship/<uuid:pk>/renew/', views.renew_scholarship_archival, name='renew-scholarship-archival'),
+    path('scholarship/<uuid:pk>/apply/', views.apply_scholarship_archival, name='apply-scholarship-archival'),
 ]
 
 

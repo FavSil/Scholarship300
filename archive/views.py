@@ -63,15 +63,15 @@ class AwardedScholarshipsByUserListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return ScholarshipInstance.objects.filter(applicant=self.request.user).filter(status__exact='o').order_by('deadline')
+        return ScholarshipInstance.objects.filter(applicant=self.request.user).filter(status__exact='d').order_by('deadline')
 
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 class AwardedScholarshipsAllListView(PermissionRequiredMixin, generic.ListView):
-    """Generic class-based view listing all scholarships awarded. Only visible to users with can_mark_returned permission."""
+    """Generic class-based view listing all scholarships awarded. Only visible to users with can_mark_applied permission."""
     model = ScholarshipInstance
-    permission_required = 'archive.can_mark_returned'
+    permission_required = 'archive.can_mark_applied'
     template_name = 'archive/scholarshipinstance_list_applied_all.html'
     paginate_by = 10
 
@@ -86,11 +86,11 @@ import datetime
 from django.contrib.auth.decorators import permission_required
 
 # from .forms import ScholarshipForm
-from archive.forms import RenewScholarshipForm
+from archive.forms import ApplyScholarshipForm
 
 
-@permission_required('archive.can_mark_returned')
-def renew_scholarship_archival(request, pk):
+@permission_required('archive.can_mark_applied')
+def apply_scholarship_archival(request, pk):
     """View function for renewing a specific ScholarshipInstance by archival."""
     scholarship_instance = get_object_or_404(ScholarshipInstance, pk=pk)
 
@@ -98,12 +98,12 @@ def renew_scholarship_archival(request, pk):
     if request.method == 'POST':
 
         # Create a form instance and populate it with data from the request (binding):
-        form = RenewScholarshipForm(request.POST)
+        form = ApplyScholarshipForm(request.POST)
 
         # Check if the form is valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required (here we just write it to the model deadline field)
-            scholarship_instance.deadline = form.cleaned_data['renewal_date']
+            #scholarship_instance.deadline = form.cleaned_data['renewal_date']
             scholarship_instance.save()
 
             # redirect to a new URL:
@@ -112,14 +112,14 @@ def renew_scholarship_archival(request, pk):
     # If this is a GET (or any other method) create the default form
     else:
         proposed_renewal_date = datetime.date.today() + datetime.timedelta(weeks=3)
-        form = RenewScholarshipForm(initial={'renewal_date': proposed_renewal_date})
+        form = ApplyScholarshipForm(initial={'renewal_date': proposed_renewal_date})
 
     context = {
         'form': form,
         'scholarship_instance': scholarship_instance,
     }
 
-    return render(request, 'archive/scholarship_renew_archival.html', context)
+    return render(request, 'archive/scholarship_apply_archival.html', context)
 
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -131,35 +131,35 @@ class DonorCreate(PermissionRequiredMixin, CreateView):
     model = Donor
     fields = '__all__'
     initial = {'date_of_death': '05/01/2018'}
-    permission_required = 'archive.can_mark_returned'
+    permission_required = 'archive.can_mark_applied'
 
 
 class DonorUpdate(PermissionRequiredMixin, UpdateView):
     model = Donor
     fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
-    permission_required = 'archive.can_mark_returned'
+    permission_required = 'archive.can_mark_applied'
 
 
 class DonorDelete(PermissionRequiredMixin, DeleteView):
     model = Donor
     success_url = reverse_lazy('donors')
-    permission_required = 'archive.can_mark_returned'
+    permission_required = 'archive.can_mark_applied'
 
 
 # Classes created for the forms DOES NOT WORK
 class ScholarshipCreate(PermissionRequiredMixin, CreateView):
     model = Scholarship
     fields = '__all__'
-    permission_required = 'archive.can_mark_returned'
+    permission_required = 'archive.can_mark_applied'
 
 
 class ScholarshipUpdate(PermissionRequiredMixin, UpdateView):
     model = Scholarship
     fields = '__all__'
-    permission_required = 'archive.can_mark_returned'
+    permission_required = 'archive.can_mark_applied'
 
 
 class ScholarshipDelete(PermissionRequiredMixin, DeleteView):
     model = Scholarship
     success_url = reverse_lazy('scholarships')
-    permission_required = 'archive.can_mark_returned'
+    permission_required = 'archive.can_mark_applied'
