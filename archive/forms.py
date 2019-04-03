@@ -7,8 +7,13 @@ from django import forms
 
 class ApplyScholarshipForm(forms.Form):
     """Form for a archival to apply Scholarships."""
-    apply_summary = forms.CharField(
-            help_text="Enter a short summary of why you should be awarded this scholarship.")
+    applicant_summary = forms.CharField(
+            help_text="Enter a short summary of why you should be awarded this scholarship"
+    )
+
+    gpa = forms.CharField(
+            help_text = "Enter your GPA."
+    )
 #
 #    def clean_renewal_date(self):
 #        data = self.cleaned_data['apply_date']

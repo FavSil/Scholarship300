@@ -70,6 +70,7 @@ class ScholarshipInstance(models.Model):
     deadline = models.DateField(null=True, blank=True)
     applicant = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
+
     @property
     def is_pastdeadline(self):
         if self.deadline and date.today() > self.deadline:
@@ -92,7 +93,7 @@ class ScholarshipInstance(models.Model):
 
     class Meta:
         ordering = ['deadline']
-        permissions = (("can_mark_returned", "Set scholarship as applied"),)
+        permissions = (("can_mark_awarded", "Set scholarship as applied"),)
 
     def __str__(self):
         """String for representing the Model object."""

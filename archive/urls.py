@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('scholarships/', views.ScholarshipListView.as_view(), name='scholarships'),
+    #path('scholarships/', views.AwardedScholarshipsAllListView.as_view(), name='all-applied'),
     path('scholarship/<int:pk>', views.ScholarshipDetailView.as_view(), name='scholarship-detail'),
     path('donors/', views.DonorListView.as_view(), name='donors'),
     path('donor/<int:pk>',
@@ -14,7 +15,7 @@ urlpatterns = [
 
 
 urlpatterns += [
-    path('myscholarships/', views.AwardedScholarshipsByUserListView.as_view(), name='my-applied'),
+    path('myscholarships/', views.AwardedScholarshipsAllListView.as_view(), name='all-applied'),
     path(r'applied/', views.AwardedScholarshipsAllListView.as_view(), name='all-applied'),  # Added for challenge
 ]
 

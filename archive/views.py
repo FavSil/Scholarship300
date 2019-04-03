@@ -65,13 +65,12 @@ class AwardedScholarshipsByUserListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return ScholarshipInstance.objects.filter(applicant=self.request.user).filter(status__exact='d').order_by('deadline')
 
-from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
-class AwardedScholarshipsAllListView(PermissionRequiredMixin, generic.ListView):
+class AwardedScholarshipsAllListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing all scholarships awarded. Only visible to users with can_mark_applied permission."""
     model = ScholarshipInstance
-    permission_required = 'archive.can_mark_applied'
+#    permission_required = 'archive.can_mark_applied'
     template_name = 'archive/scholarshipinstance_list_applied_all.html'
     paginate_by = 10
 
@@ -89,7 +88,7 @@ from django.contrib.auth.decorators import permission_required
 from archive.forms import ApplyScholarshipForm
 
 
-@permission_required('archive.can_mark_applied')
+#@permission_required('archive.can_mark_applied')
 def apply_scholarship_archival(request, pk):
     """View function for renewing a specific ScholarshipInstance by archival."""
     scholarship_instance = get_object_or_404(ScholarshipInstance, pk=pk)
@@ -125,6 +124,7 @@ def apply_scholarship_archival(request, pk):
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Donor
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 class DonorCreate(PermissionRequiredMixin, CreateView):

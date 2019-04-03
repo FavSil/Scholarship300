@@ -10,11 +10,11 @@
       <li>
         <a href="{{ scholarship.get_absolute_url }}">{{ scholarship.name }}</a> ({{scholarship.donor}})
       </li>
-      {% endfor %}
-
+      {%endfor%}
     </ul>
 
     {% else %}
       <p>There are no scholarships in the library.</p>
     {% endif %}
+      <p>There are no scholarships applied.</p>
 {% endblock %}
