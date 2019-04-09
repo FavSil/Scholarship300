@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Donor: {{ donor }} </h1>
+<p>{{donor.date_of_birth}} - {% if donor.date_of_death %}{{donor.date_of_death}}{% endif %}</p>
+
+<div style="margin-left:20px;margin-top:20px">
+<h4>Books</h4>
+
+<dl>
+{% for scholarship in donor.scholarship_set.all %}
+  <dt><a href="{% url 'scholarship-detail' scholarship.pk %}">{{scholarship}}</a> ({{scholarship.scholarshipinstance_set.all.count}})</dt>
+  <dd>{{scholarship.summary}}</dd>
+{% endfor %}
+</dl>
+
+</div>
+{% endblock %}

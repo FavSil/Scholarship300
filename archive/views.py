@@ -1,8 +1,17 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .models import Donor
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.decorators import permission_required
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
 
 # Create your views here.
 
-from .models import Scholarship, Donor, ScholarshipInstance, Type
+from .models import Scholarship, Donor, ScholarshipInstance, Type, Student
 
 
 def index(request):
@@ -26,6 +35,7 @@ def index(request):
                  'num_instances_available': num_instances_available, 'num_donors': num_donors,
                  'num_visits': num_visits},
     )
+
 
 
 from django.views import generic
@@ -53,7 +63,6 @@ class DonorDetailView(generic.DetailView):
     model = Donor
 
 
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 ##in testing will not work propperly!!!
 class AwardedScholarshipsByUserListView(LoginRequiredMixin, generic.ListView):
@@ -75,17 +84,29 @@ class AwardedScholarshipsAllListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return ScholarshipInstance.objects.filter(status__exact='o').order_by('deadline')
+        return ScholarshipInstance.objects.filter(status__exact='a').order_by('deadline')
 
+class Success(LoginRequiredMixin, generic.ListView):
+    template_name = 'archive/success.html'
+    paginate_by = 10
+
+class ApplicantsListView(generic.ListView):
+    model = ScholarshipInstance
+    template_name = 'archive/applicants_list.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return ScholarshipInstance.objects.filter(status__exact='a').order_by('deadline')
 
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 import datetime
-from django.contrib.auth.decorators import permission_required
+
 
 # from .forms import ScholarshipForm
 from archive.forms import ApplyScholarshipForm
+
 
 
 #@permission_required('archive.can_mark_applied')
@@ -102,11 +123,12 @@ def apply_scholarship_archival(request, pk):
         # Check if the form is valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required (here we just write it to the model deadline field)
-            #scholarship_instance.deadline = form.cleaned_data['renewal_date']
+            scholarship_instance.gpa = form.cleaned_data['gpa']
             scholarship_instance.save()
 
             # redirect to a new URL:
-            return HttpResponseRedirect(reverse('all-applied'))
+            return HttpResponseRedirect(reverse('index'))
+            #return render(request, 'archive/success.html')
 
     # If this is a GET (or any other method) create the default form
     else:
@@ -121,10 +143,6 @@ def apply_scholarship_archival(request, pk):
     return render(request, 'archive/scholarship_apply_archival.html', context)
 
 
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from .models import Donor
-from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 class DonorCreate(PermissionRequiredMixin, CreateView):

@@ -1,0 +1,80 @@
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+    font-size: 18px;
+    font-weight: 500;
+}
+.sidebar-color {
+	background-color: rgba(255, 255, 255, 0.8);
+  border-bottom-right-radius: 50px;
+}
+.log {
+	background-image: url(uclogo.jpg);
+	vertical-align: middle;
+	width: 50px;
+	height: 50px;
+}
+
+.text {
+	position: absolute;
+	width: 300px;
+	padding: 20px;
+	margin: 20px;
+	border: 25px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.head {
+	font-family: "Arial";
+	font-size: 30px;
+	color: #000000;
+	background: rgba(255, 255, 255, 0.8);
+  border-radius: 3px;
+	padding: 2px;
+	width: 700px;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.home {
+	background-image: url(TFDL1.jpg), url(Wallpaper_Pixejoo.jpg);
+	background-position: center, left top;
+	background-repeat: no-repeat, repeat;
+
+	height: 100%;
+	height: 50vw;
+	width: 100%;
+}
+
+.home2 {
+	background-image: url(Wallpaper_Pixejoo.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+
+	height: 100%;
+	height: 50vw;
+	width: 100%;
+}
+
+.slide {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border:25px;
+	padding: 20px;
+	margin: 20px;
+	width: 40%;
+	position: absolute;
+	right: 0;
+	left: 20%;
+	top: 450%;
+}
+
+.datalist {
+  margin-top: 20px;
+  padding-left: 10px;
+  list-style: decimal;
+  font-size: 18px;
+  font-weight: 500;
+}

@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Apply: {{scholarship_instance.scholarship.name}}</h1>
+    <p>Applicant: {{scholarship_instance.applicant}}</p>
+    <p{% if scholarship_instance.is_pastdeadline %} class="text-danger"{% endif %}>Deadline: {{scholarship_instance.deadline}}</p>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit" />
+    </form>
+{% endblock %}

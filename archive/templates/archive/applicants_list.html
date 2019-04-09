@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+{% load static from staticfiles %}
+{% block content %}
+<link rel ="stylesheet" href = "{% static 'styles.css'%}">
+<body class ="home2">
+
+    <h1>Applied scholarships</h1>
+
+    {% if scholarshipinstance_list %}
+    <ul>
+
+      {% for scholarshipinst in scholarshipinstance_list %}
+      <li class="{% if scholarshipinst.is_pastdeadline %}text-danger{% endif %}">
+        <a href="{% url 'scholarship-detail' scholarshipinst.scholarship.pk %}">{{scholarshipinst.scholarship.name}}</a> ({{ scholarshipinst.due_back }})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>There are no scholarships applied.</p>
+    {% endif %}
+{% endblock %}
+
+</body>
+s

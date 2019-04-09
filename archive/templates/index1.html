@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Local Scholarship Home</h1>
+
+<p>Welcome to <em>Scholarship300</em></p>
+<p>SENG300</p>
+
+
+<h2>Dynamic content</h2>
+
+<p>The library has the following record counts:</p>
+<ul>
+<li><strong>Scholarships:</strong> {{ num_scholarships }}</li>
+<li><strong>Total Scholarships:</strong> {{ num_instances }}</li>
+<li><strong>Scholarships available:</strong> {{ num_instances_available }}</li>
+<li><strong>Donors:</strong> {{ num_donors }}</li>
+</ul>
+
+
+You have visited this page {{ num_visits }} times.
+
+{% endblock %}

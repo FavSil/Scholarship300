@@ -1,20 +1,25 @@
 {% extends "base_generic.html" %}
-
+{% load static from staticfiles %}
 {% block content %}
+<link rel ="stylesheet" href = "{% static 'styles.css'%}">
+<body class ="home2">
+
     <h1>Scholarship List</h1>
 
     {% if scholarship_list %}
-    <ul>
+    <ul class="datalist">
 
       {% for scholarship in scholarship_list %}
       <li>
         <a href="{{ scholarship.get_absolute_url }}">{{ scholarship.name }}</a> ({{scholarship.donor}})
       </li>
-      {%endfor%}
+      {% endfor %}
+
     </ul>
 
     {% else %}
-      <p>There are no scholarships in the library.</p>
+      <p class="test123">There are no scholarships in the library.</p>
     {% endif %}
-      <p>There are no scholarships applied.</p>
 {% endblock %}
+
+</body>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 # Register your models here.
-from .models import Donor, Type, Scholarship, ScholarshipInstance, GPA
+from .models import Donor, Type, Scholarship, ScholarshipInstance, GPA, Student
 
 """Minimal registration of Models.
 admin.site.register(Scholarship)
@@ -12,6 +12,7 @@ admin.site.register(GPA)
 
 admin.site.register(Type)
 admin.site.register(GPA)
+admin.site.register(Student)
 
 
 class ScholarshipsInline(admin.TabularInline):

@@ -1,11 +1,14 @@
 {% extends "base_generic.html" %}
-
+{% load static from staticfiles %}
 {% block content %}
+<link rel ="stylesheet" href = "{% static 'styles.css'%}">
+<body class="home2">
+
 
 <h1>Donor List</h1>
 
 {% if donor_list %}
-  <ul>
+  <ul class="datalist">
 
   {% for donor in donor_list %}
     <li>
@@ -23,3 +26,4 @@
 
 
 {% endblock %}
+</body>

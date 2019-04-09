@@ -1,6 +1,9 @@
 {% extends "base_generic.html" %}
-
+{% load static from staticfiles %}
 {% block content %}
+<link rel ="stylesheet" href = "{% static 'styles.css'%}">
+<body class ="home2">
+
 
 <h1>Name: {{ scholarship.name }}</h1>
 
@@ -25,3 +28,5 @@
 {% endblock %}
 
 <!--{% if perms.archive.can_mark_applied %}- <a href="{% url 'apply-scholarship-archival' scholarshipinst.id %}">Renew</a>  {% endif %} -->
+
+</body>

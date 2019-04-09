@@ -1,13 +1,14 @@
 {% extends "base_generic.html" %}
-
+{% load static from staticfiles %}
 {% block content %}
-<h1>Local Scholarship Home</h1>
+<link rel ="stylesheet" href = "{% static 'styles.css'%}">
+<body class ="home">
+<h1 class="head">Welcome to UofC Scholarships</h1>
 
-<p>Welcome to <em>Scholarship300</em></p>
-<p>SENG300</p>
 
 
-<h2>Dynamic content</h2>
+<div class = "text">
+<h2>Scholarship Info</h2>
 
 <p>The library has the following record counts:</p>
 <ul>
@@ -18,6 +19,34 @@
 </ul>
 
 
+
 You have visited this page {{ num_visits }} times.
+</div>
+
+<br>
+
+<div class = "video">
+
+	<img class ="slide" src ="{% static 'stock2.jpg'%}" >
+	<img class ="slide" src ="{% static 'stock1.jpg'%}" >
+	<img class ="slide" src ="{% static 'stock3.jpg'%}" >
+</div>
+<script>
+var myIndex = 0;
+carousel();
+function carousel(){
+	var i;
+	var x = document.getElementsByClassName("slide");
+	for(i = 0; i < x.length; i++){
+		x[i].style.display = "none";
+	}
+	myIndex++;
+	if(myIndex > x.length) {myIndex =1}
+	x[myIndex-1].style.display ="block";
+	setTimeout(carousel, 5000);
+}
+</script>
+
 
 {% endblock %}
+</body>

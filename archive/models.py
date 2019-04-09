@@ -69,7 +69,7 @@ class ScholarshipInstance(models.Model):
     imprint = models.CharField(max_length=200)
     deadline = models.DateField(null=True, blank=True)
     applicant = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-
+    applicants = models.ManyToManyField('Student')
 
     @property
     def is_pastdeadline(self):
@@ -114,6 +114,26 @@ class Donor(models.Model):
     def get_absolute_url(self):
         """Returns the url to access a particular donor instance."""
         return reverse('donor-detail', args=[str(self.id)])
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return '{0}, {1}'.format(self.last_name, self.first_name)
+
+class Student(models.Model):
+    """Model representing an student."""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
+                          help_text="Unique ID for this particular student")
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    gpa = models.DecimalField(max_digits = 3, decimal_places = 2)
+    applied_scholarships = models.ManyToManyField(ScholarshipInstance)
+#    rewarded_scholarships = models.ForeignKey(ScholarshipInstance)
+    class Meta:
+        ordering = ['last_name', 'first_name']
+
+#    def get_absolute_url(self):
+#        """Returns the url to access a particular donor instance."""
+#        return reverse('donor-detail', args=[str(self.id)])
 
     def __str__(self):
         """String for representing the Model object."""

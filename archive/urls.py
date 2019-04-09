@@ -11,12 +11,15 @@ urlpatterns = [
     path('donors/', views.DonorListView.as_view(), name='donors'),
     path('donor/<int:pk>',
          views.DonorDetailView.as_view(), name='donor-detail'),
+    path('applicants/', views.ApplicantsListView.as_view(), name= 'student-applied')
 ]
 
 
 urlpatterns += [
-    path('myscholarships/', views.AwardedScholarshipsAllListView.as_view(), name='all-applied'),
-    path(r'applied/', views.AwardedScholarshipsAllListView.as_view(), name='all-applied'),  # Added for challenge
+    path('myscholarships/', views.AwardedScholarshipsByUserListView.as_view(), name='my-applied'),
+    path(r'apply/', views.AwardedScholarshipsAllListView.as_view(), name='all-applied'),
+    path('success', views.Success.as_view(), name='success' ),
+
 ]
 
 

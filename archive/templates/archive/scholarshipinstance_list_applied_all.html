@@ -1,7 +1,10 @@
 {% extends "base_generic.html" %}
-
+{% load static from staticfiles %}
 {% block content %}
-    <h1>All Applied Sholorship</h1>
+<link rel ="stylesheet" href = "{% static 'styles.css'%}">
+<body class="home2">
+
+    <h1>Applied Scholarships</h1>
 
     {% if scholarshipinstance_list %}
     <ul>
@@ -17,3 +20,4 @@
       <p>There are no scholarships applied.</p>
     {% endif %}
 {% endblock %}
+</body>

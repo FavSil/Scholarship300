@@ -1,6 +1,10 @@
 {% extends "base_generic.html" %}
-
+{% load static from staticfiles %}
 {% block content %}
+<link rel ="stylesheet" href = "{% static 'styles.css'%}">
+<body class ="home2">
+
+
     <h1>Apply: {{scholarship_instance.scholarship.name}}</h1>
     <p>Applicant: {{scholarship_instance.applicant}}</p>
     <p{% if scholarship_instance.is_pastdeadline %} class="text-danger"{% endif %}>Due date: {{scholarship_instance.deadline}}</p>
@@ -13,3 +17,5 @@
         <input type="submit" value="Submit" />
     </form>
 {% endblock %}
+
+</body>

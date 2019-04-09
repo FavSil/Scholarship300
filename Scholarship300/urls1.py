@@ -35,12 +35,9 @@ urlpatterns += [
 from django.conf import settings
 from django.conf.urls.static import static
 
-#update , allow django to server static files
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
 
 urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns+= staticfiles_urlpatterns()
+
 
 #Add URL maps to redirect the base URL to our application
 from django.views.generic import RedirectView

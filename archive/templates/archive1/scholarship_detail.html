@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Name: {{ scholarship.name }}</h1>
+
+<p><strong>Donor:</strong> <a href="{% url 'donor-detail' scholarship.donor.pk %}">{{ scholarship.donor }}</a></p>
+<p><strong>Summary:</strong> {{ scholarship.summary }}</p>
+<p><strong>Scholarship Amount:</strong> {{ scholarship.valuet }}</p>
+<p><strong>GPA:</strong> {{ scholarship.gpa }}</p>
+<p><strong>Type:</strong> {% for type in scholarship.type.all %}{{type}}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+
+<div style="margin-left:20px;margin-top:20px">
+<h4>Apply</h4>
+
+{% for scholarship in scholarship.scholarshipinstance_set.all %}
+<hr>
+<p class="{% if scholarship.status == 'a' %}text-success{% elif copy.status == 'd' %}text-danger{% else %}text-warning{% endif %}">{{ scholarship.get_status_display }}</p>
+{% if scholarship.status != 'a' %}<p><strong>Not Available:</strong> {{scholarship.due_back}}</p>{% endif %}
+<p><strong>Imprint:</strong> {{copy.imprint}}</p>
+<p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
+
+{% endfor %}
+</div>
+{% endblock %}
+
+<!--{% if perms.archive.can_mark_applied %}- <a href="{% url 'apply-scholarship-archival' scholarshipinst.id %}">Renew</a>  {% endif %} -->
